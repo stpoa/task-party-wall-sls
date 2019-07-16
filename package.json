@@ -1,0 +1,28 @@
+{
+  "name": "task-party-wall-sls",
+  "version": "1.0.0",
+  "main": "handler.js",
+  "scripts": {
+    "offline": "DB='mongodb://localhost:27017/db' JWT_SECRET='reallystrongsecret' sls offline start --skipCacheInvalidation"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bcryptjs-then": "^1.0.1",
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "^5.0.13"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.3.2",
+    "@types/mongoose": "^5.5.8",
+    "@types/node": "^12.6.3",
+    "serverless-offline": "^3.33.0",
+    "serverless-webpack": "^5.3.1",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.35.3"
+  }
+}

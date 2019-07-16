@@ -1,0 +1,82 @@
+service: api-with-auth
+
+# custom:
+  # secrets: ${file(secrets.json)}
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: us-east-1
+  # environment:
+    # JWT_SECRET: ${self:custom.secrets.JWT_SECRET}
+    # DB: ${self:custom.secrets.DB}
+
+functions:
+  verify-token:
+    handler: auth/handlers/auth.handler
+
+  login:
+    handler: auth/handlers/login.handler
+    events:
+      - http:
+          path: login
+          method: post
+          cors: true
+
+  register:
+    handler: auth/handlers/register.handler
+    events:
+      - http:
+          path: register
+          method: post
+          cors: true
+
+  me:
+    handler: auth/handlers/me.handler
+    events:
+      - http:
+          path: me
+          method: get
+          cors: true
+          authorizer: verify-token
+
+  get-users:
+    handler: user/handlers/get-users.handler
+    events:
+      - http:
+          path: users
+          method: get
+          cors: true
+          authorizer: verify-token
+
+  create-food:
+    handler: food/handlers/create-food.handler
+    events:
+      - http:
+          path: foods
+          method: post
+          cors: true
+          authorizer: verify-token
+
+  remove-food:
+    handler: food/handlers/remove-food.handler
+    events:
+      - http:
+          path: foods/{id}
+          method: delete
+          cors: true
+          authorizer: verify-token
+
+  get-foods:
+    handler: food/handlers/get-foods.handler
+    events:
+      - http:
+          path: foods
+          method: get
+          cors: true
+          authorizer: verify-token
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
