@@ -8,7 +8,7 @@ export const handler = event =>
   connectToDatabase()
     .then(() => registerUser(JSON.parse(event.body)))
     .then(dataResponse)
-    .catch(errorResponse)
+    .catch(errorResponse('not-found'))
 
 const checkIfUserExist = ({ email, name, password }) =>
   findUser({ email })
@@ -19,7 +19,11 @@ const checkIfUserExist = ({ email, name, password }) =>
     )
     .then(password => createUser({ name, email, password }))
 
-const tokenResponse = user => ({ auth: true, token: signToken(user._id) })
+const tokenResponse = user => {
+  const token = signToken(user._id)
+  console.log({ user, token })
+  return ({ auth: true, token })
+}
 
 const registerUser = eventBody =>
   validateInput(eventBody)

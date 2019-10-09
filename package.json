@@ -16,6 +16,7 @@
     "mongoose": "^5.0.13"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.33",
     "@types/jsonwebtoken": "^8.3.2",
     "@types/mongoose": "^5.5.8",
     "@types/node": "^12.6.3",

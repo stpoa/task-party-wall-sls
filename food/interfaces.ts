@@ -1,11 +1,12 @@
 export interface Food {
-  _id: string
   name: string
   price: number
   descrtiption?: string
   amount: MassAmount | VolumeAmount
   owner: string
 }
+
+export type WithId <T extends {}> = { _id: string } & T
 
 export interface MassAmount {
   mass: number

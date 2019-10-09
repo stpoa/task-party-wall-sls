@@ -59,6 +59,16 @@ functions:
           cors: true
           authorizer: verify-token
 
+  update-food:
+    handler: food/handlers/create-food.handler
+    events:
+      - http:
+          path: foods/{id}
+          method: post
+          cors: true
+          authorizer: verify-token
+
+
   remove-food:
     handler: food/handlers/remove-food.handler
     events:
